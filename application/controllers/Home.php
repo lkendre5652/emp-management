@@ -6,28 +6,41 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
-		$username = $this->input->post('username');		
+		$this->load->helper('url');
+		$this->load->view("common/header");
+		$this->load->view("home");
+		$this->load->view("common/footer");
+	}
+
+	public function login(){
+		$this->load->helper('url');		
+		$username = $this->input->post('username');
+		$password = $this->input->post('password');		
 		$data  = array();		
 		if(empty($username) ){
 			$data['user_err'] =  "This field should not be blank!!";
 		}else{
 			$data['user_success'] =  "Perfetch match!!";
 		}
-		$this->load->helper('url');
+		if(empty($password) ){
+			$data['pass_err'] =  "This field should not be blank!!";
+		}else{
+			$data['pass_success'] =  "Perfetch match!!";
+		}	
+		
+		if( ( empty($username) ) && ( empty($password) ) ){
+			$data['comm_err'] = "Have you entered all the information correctly? Please check and try again.";
+		}
 		$this->load->view("common/header");
 		$this->load->view("home",$data);
 		$this->load->view("common/footer");
 	}
 
-	public function login(){
-		
-
-	}
-    // public function hello($num1,$num2){
-    //     echo "Hi".$num1;
-    //     echo "Hi".$num2;
-    // }
-    // public function banner(){
-    //         echo "banner";
-    //     }
+	 public function singup(){
+		$this->load->helper('url');
+		$this->load->view('common/header'); 
+		$this->load->view('signup'); 
+		$this->load->view('common/footer'); 
+     }
+ 
 }
